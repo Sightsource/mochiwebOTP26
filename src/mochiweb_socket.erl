@@ -30,7 +30,7 @@ listen(Ssl, Port, Opts, SslOpts) ->
     end.
 
 add_unbroken_ciphers_default(Opts) ->
-    Default = filter_unsecure_cipher_suites(ssl:cipher_suites()),
+    Default = filter_unsecure_cipher_suites(ssl:cipher_suites(default, 'tlsv1.2')),
     Ciphers = filter_broken_cipher_suites(proplists:get_value(ciphers, Opts, Default)),
     [{ciphers, Ciphers} | proplists:delete(ciphers, Opts)].
 
